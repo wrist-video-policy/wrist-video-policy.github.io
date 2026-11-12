@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wrist Video Policy. A research project exploring video generation and stitched pose estimation for robot manipulation.">
+  <meta name="color-scheme" content="light">
+  <title>Wrist Video Policy</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to content</a>
+  <header>
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">w</span> Wrist Video Policy</a>
+    <nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#experiments">Experiments</a></nav>
+    <span class="anonymous">Anonymous submission</span>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-top"><span class="eyebrow">VIDEO GENERATION × ROBOT MANIPULATION</span><span class="hero-index">Research project / 2026</span></div>
+      <h1 id="title">See the future.<br><span>Move through it.</span></h1>
+      <div class="hero-intro"><p>Wrist Video Policy connects generated wrist-view video to camera motion and gripper control through a stitched 3D model.</p><a class="button light" href="#experiments">Explore the demonstrations <span aria-hidden="true">↗</span></a></div>
+      <div class="hero-gallery">
+        <figure><video class="ambient" muted loop playsinline preload="metadata" poster="galaxea-door.jpg" aria-label="Wrist view of opening a washing machine door"><source src="galaxea-door.mp4" type="video/mp4"></video><figcaption><span>Open the washer door</span><small>Galaxea R1 Pro</small></figcaption></figure>
+        <figure><video class="ambient" muted loop playsinline preload="metadata" poster="franka-basket.jpg" aria-label="Wrist view of placing a basketball in a basket"><source src="franka-basket.mp4" type="video/mp4"></video><figcaption><span>Place the ball in the basket</span><small>Franka</small></figcaption></figure>
+        <figure><video class="ambient" muted loop playsinline preload="metadata" poster="piper-bread.jpg" aria-label="Wrist view of placing a vegetable on bread"><source src="piper-bread.mp4" type="video/mp4"></video><figcaption><span>Put the vegetable on the bread</span><small>PiperX</small></figcaption></figure>
+      </div>
+      <div class="hero-bottom"><span>Recorded wrist-camera views · real-world tasks</span><button id="motion-toggle" aria-pressed="false">Pause motion <span aria-hidden="true">Ⅱ</span></button></div>
+    </section>
+    <section id="overview" class="section overview">
+      <div><span class="eyebrow">THE IDEA</span><h2>A visual future.<br>A path to action.</h2></div>
+      <div class="overview-copy"><p class="lead">What if a robot could use a video of what comes next to decide how to move?</p><p>Starting from a wrist view and a task instruction, a video model generates future observations. A pose estimator stitched into the video-latent space translates these observations into camera trajectories and gripper openings.</p><p>The demonstrations span tabletop manipulation and appliance interaction on three robot platforms.</p></div>
+    </section>
+    <section id="method" class="section method">
+      <div class="section-heading"><div><span class="eyebrow">METHOD</span><h2>From video latents<br>to robot motion.</h2></div><p>An expert pose estimator supervises the stitched model during training. At inference, generated video latents provide the visual plan.</p></div>
+      <button class="figure-button" data-figure="method.webp" data-title="Training and inference architecture" aria-label="Enlarge the training and inference architecture"><img src="method.webp" alt="Training distills an expert pose estimator into a stitched 3D model. Inference generates video latents from a wrist view and instruction, then predicts camera trajectory and gripper opening." loading="lazy"><span>Explore the architecture ↗</span></button>
+      <div class="method-notes"><article><h3>Wrist-view observation</h3><p>The camera travels with the gripper, placing the interaction at the center of the visual input.</p></article><article><h3>Latent-space stitching</h3><p>A learned adapter connects video latents to the retained layers of a pose estimator.</p></article><article><h3>Motion and grasp</h3><p>Camera trajectories and gripper openings provide the outputs for downstream robot control.</p></article></div>
+    </section>
+    <section id="experiments" class="section experiments">
+      <div class="section-heading"><div><span class="eyebrow">REAL-WORLD DEMONSTRATIONS</span><h2>Different bodies.<br>Everyday interactions.</h2></div><p>Explore recorded wrist-camera clips from each platform. Select a task to play its saved rollout.</p></div>
+      <div class="platforms" role="group" aria-label="Select robot platform"><button class="selected" data-platform="franka" aria-pressed="true">Franka <span>Single arm</span></button><button data-platform="piper" aria-pressed="false">PiperX <span>Dual arm</span></button><button data-platform="galaxea" aria-pressed="false">Galaxea R1 Pro <span>Mobile manipulation</span></button></div>
+      <div class="demo-layout"><div class="player-panel"><video id="demo-video" controls muted loop playsinline preload="metadata" poster="franka-basket.jpg" aria-label="Selected task wrist-camera recording" src="franka-basket.mp4"></video><div class="player-caption"><h3 id="demo-title">Place the ball in the basket</h3><span>Wrist view</span></div></div><div class="task-panel"><span class="eyebrow">SELECT A TASK</span><div id="task-list"></div><p>Clips show the saved wrist-view sequence. Playback follows the timing of the source video.</p></div></div>
+    </section>
+    <section class="section comparison">
+      <div class="section-heading"><div><span class="eyebrow">VISUAL PLANNING</span><h2>How does the future unfold?</h2></div><p>A qualitative comparison of generated frames for the instruction “put the pen into the paper bag.”</p></div>
+      <button class="figure-button" data-figure="comparison.webp" data-title="Video generation comparison" aria-label="Enlarge video generation comparison"><img src="comparison.webp" alt="Initial state and generated frame sequences from VERA-OMNI, Cosmos 3, and VPP2 for putting a pen into a paper bag." loading="lazy"><span>View the frame sequences ↗</span></button>
+    </section>
+    <section class="closing"><span class="eyebrow">WRIST VIDEO POLICY</span><p>Visual plans.<br><em>Physical interactions.</em></p><a href="#top">Back to the top ↑</a></section>
+  </main>
+  <footer><span>Wrist Video Policy</span><span>Anonymous research project</span></footer>
+  <dialog id="figure-dialog"><div class="dialog-top"><h2 id="figure-title"></h2><button id="close-dialog" aria-label="Close enlarged figure">Close ×</button></div><img id="figure-image" alt=""></dialog>
+</body>
+</html>
