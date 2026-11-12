@@ -27,8 +27,8 @@ Object.entries(tasks).forEach(([platform, platformTasks]) => {
     card.dataset.robot = platform;
 
     const video = document.createElement('video');
-    video.src = `${task.file}.mp4`;
-    video.poster = `${task.file}.jpg`;
+    video.src = `${task.file}.mp4?v=multiview1`;
+    video.poster = `${task.file}.jpg?v=multiview1`;
     video.controls = true;
     video.muted = true;
     video.loop = true;
