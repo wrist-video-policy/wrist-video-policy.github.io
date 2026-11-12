@@ -34,7 +34,7 @@ Object.entries(tasks).forEach(([platform, platformTasks]) => {
     video.loop = true;
     video.playsInline = true;
     video.preload = 'none';
-    video.setAttribute('aria-label', `${platformNames[platform]} — ${task.title}`);
+    video.setAttribute('aria-label', `${platformNames[platform]} — ${task.title}, synchronized multi-view recording`);
     video.addEventListener('play', () => {
       gallery.querySelectorAll('video').forEach(other => {
         if (other !== video) other.pause();
@@ -44,7 +44,7 @@ Object.entries(tasks).forEach(([platform, platformTasks]) => {
     const caption = document.createElement('div');
     caption.className = 'video-caption';
     const robot = document.createElement('p');
-    robot.textContent = platformNames[platform];
+    robot.textContent = `${platformNames[platform]} · ${platform === 'franka' ? 'Wrist + external view' : 'Two wrists + external view'}`;
     const title = document.createElement('h3');
     title.textContent = task.title;
     caption.append(robot, title);
@@ -52,6 +52,40 @@ Object.entries(tasks).forEach(([platform, platformTasks]) => {
     gallery.append(card);
   });
 });
+
+const dots = document.querySelector('#video-dots');
+const previous = document.querySelector('#previous-video');
+const next = document.querySelector('#next-video');
+let visibleCards = [...gallery.children];
+let currentIndex = 0;
+
+function goToVideo(index) {
+  currentIndex = Math.max(0, Math.min(index, visibleCards.length - 1));
+  gallery.scrollTo({left: visibleCards[currentIndex].offsetLeft, behavior: 'smooth'});
+}
+
+function updateCarousel() {
+  const distances = visibleCards.map(card => Math.abs(card.offsetLeft - gallery.scrollLeft));
+  currentIndex = distances.indexOf(Math.min(...distances));
+  document.querySelector('#video-count').textContent = `${currentIndex + 1} / ${visibleCards.length}`;
+  previous.disabled = currentIndex === 0;
+  next.disabled = currentIndex === visibleCards.length - 1;
+  [...dots.children].forEach((dot, index) => dot.setAttribute('aria-pressed', index === currentIndex));
+  visibleCards.forEach((card, index) => {
+    if (index !== currentIndex) card.querySelector('video').pause();
+  });
+}
+
+function buildDots() {
+  dots.replaceChildren();
+  visibleCards.forEach((card, index) => {
+    const dot = document.createElement('button');
+    dot.setAttribute('aria-label', card.querySelector('h3').textContent);
+    dot.addEventListener('click', () => goToVideo(index));
+    dots.append(dot);
+  });
+  updateCarousel();
+}
 
 platformButtons.forEach(button => {
   button.addEventListener('click', () => {
@@ -63,10 +97,26 @@ platformButtons.forEach(button => {
     });
     gallery.querySelectorAll('.video-card').forEach(card => {
       card.hidden = platform !== 'all' && card.dataset.robot !== platform;
-      if (card.hidden) card.querySelector('video').pause();
+      card.querySelector('video').pause();
     });
+    visibleCards = [...gallery.children].filter(card => !card.hidden);
+    gallery.scrollTo({left: 0, behavior: 'instant'});
+    buildDots();
   });
 });
+
+previous.addEventListener('click', () => goToVideo(currentIndex - 1));
+next.addEventListener('click', () => goToVideo(currentIndex + 1));
+gallery.addEventListener('scroll', updateCarousel, {passive: true});
+gallery.addEventListener('keydown', event => {
+  if (event.target !== gallery) return;
+  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+    event.preventDefault();
+    goToVideo(currentIndex + (event.key === 'ArrowRight' ? 1 : -1));
+  }
+});
+window.addEventListener('resize', updateCarousel);
+buildDots();
 
 const dialog = document.querySelector('#figure-dialog');
 document.querySelectorAll('[data-figure]').forEach(button => {
