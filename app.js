@@ -16,60 +16,57 @@ const tasks = {
   ]
 };
 
-const player = document.querySelector('#demo-video');
-const taskList = document.querySelector('#task-list');
+const platformNames = {franka: 'Franka', piper: 'PiperX', galaxea: 'Galaxea R1 Pro'};
+const gallery = document.querySelector('#video-gallery');
 const platformButtons = document.querySelectorAll('[data-platform]');
 
-function selectTask(task, selectedButton, play) {
-  taskList.querySelectorAll('button').forEach(button => {
-    const selected = button === selectedButton;
-    button.classList.toggle('selected', selected);
-    button.setAttribute('aria-pressed', selected);
-  });
-  player.poster = `${task.file}.jpg`;
-  player.src = `${task.file}.mp4`;
-  document.querySelector('#demo-title').textContent = task.title;
-  if (play) player.play().catch(() => {});
-}
+Object.entries(tasks).forEach(([platform, platformTasks]) => {
+  platformTasks.forEach(task => {
+    const card = document.createElement('article');
+    card.className = 'video-card';
+    card.dataset.robot = platform;
 
-function selectPlatform(platform, play) {
-  platformButtons.forEach(button => {
-    const selected = button.dataset.platform === platform;
-    button.classList.toggle('selected', selected);
-    button.setAttribute('aria-pressed', selected);
-  });
-  taskList.replaceChildren();
-  tasks[platform].forEach((task, index) => {
-    const button = document.createElement('button');
-    button.className = 'task';
-    button.append(document.createTextNode(task.title));
-    const arrow = document.createElement('span');
-    arrow.textContent = '↗';
-    arrow.setAttribute('aria-hidden', 'true');
-    button.append(arrow);
-    button.addEventListener('click', () => selectTask(task, button, true));
-    taskList.append(button);
-    if (index === 0) selectTask(task, button, play);
-    else button.setAttribute('aria-pressed', 'false');
-  });
-}
-platformButtons.forEach(button => button.addEventListener('click', () => selectPlatform(button.dataset.platform, true)));
-selectPlatform('franka', false);
+    const video = document.createElement('video');
+    video.src = `${task.file}.mp4`;
+    video.poster = `${task.file}.jpg`;
+    video.controls = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = 'none';
+    video.setAttribute('aria-label', `${platformNames[platform]} — ${task.title}`);
+    video.addEventListener('play', () => {
+      gallery.querySelectorAll('video').forEach(other => {
+        if (other !== video) other.pause();
+      });
+    });
 
-const ambientVideos = document.querySelectorAll('.ambient');
-const motionToggle = document.querySelector('#motion-toggle');
-let motionPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function updateMotion() {
-  ambientVideos.forEach(video => {
-    if (motionPaused || document.hidden) video.pause();
-    else video.play().catch(() => {});
+    const caption = document.createElement('div');
+    caption.className = 'video-caption';
+    const robot = document.createElement('p');
+    robot.textContent = platformNames[platform];
+    const title = document.createElement('h3');
+    title.textContent = task.title;
+    caption.append(robot, title);
+    card.append(video, caption);
+    gallery.append(card);
   });
-  motionToggle.textContent = motionPaused ? 'Play motion ▷' : 'Pause motion Ⅱ';
-  motionToggle.setAttribute('aria-pressed', motionPaused);
-}
-motionToggle.addEventListener('click', () => { motionPaused = !motionPaused; updateMotion(); });
-document.addEventListener('visibilitychange', updateMotion);
-updateMotion();
+});
+
+platformButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const platform = button.dataset.platform;
+    platformButtons.forEach(item => {
+      const selected = item === button;
+      item.classList.toggle('selected', selected);
+      item.setAttribute('aria-pressed', selected);
+    });
+    gallery.querySelectorAll('.video-card').forEach(card => {
+      card.hidden = platform !== 'all' && card.dataset.robot !== platform;
+      if (card.hidden) card.querySelector('video').pause();
+    });
+  });
+});
 
 const dialog = document.querySelector('#figure-dialog');
 document.querySelectorAll('[data-figure]').forEach(button => {
