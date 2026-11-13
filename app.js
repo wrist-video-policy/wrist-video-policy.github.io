@@ -15,12 +15,20 @@ const tasks = {
   piper: [
     {title: 'Put the vegetable on the bread', file: 'piper-bread'},
     {title: 'Wipe the plate with a towel', file: 'piper-wipe'},
-    {title: 'Put the chicken wing into the bowl', file: 'piper-plate'}
+    {title: 'Put the chicken wing into the bowl', file: 'piper-plate'},
+    {title: 'Lift the bucket with the right arm', file: 'piper-demo-lift-bucket'},
+    {title: 'Put the cube on the plate', file: 'piper-demo-pick-rubik-cube'},
+    {title: 'Put the bread into the toaster and release it', file: 'piper-demo-insert-bread'},
+    {title: 'Stack the cups', file: 'piper-demo-stack-cups'},
+    {title: 'Put the green cube into the bowl', file: 'piper-demo-put-green-cube'},
+    {title: 'Put the red cube into the bowl', file: 'piper-demo-put-red-cube-recovery'},
+    {title: 'Put the vegetable on the bread', file: 'piper-demo-put-vegetable-2'}
   ],
   galaxea: [
     {title: 'Open the washer door', file: 'galaxea-door'},
     {title: 'Grasp and hold the knob', file: 'galaxea-knob'},
-    {title: 'Pick up fallen clothes', file: 'galaxea-laundry'}
+    {title: 'Pick up fallen clothes', file: 'galaxea-laundry'},
+    {title: 'Take the clothes out of the washing machine', file: 'galaxea-take-clothes'}
   ]
 };
 
@@ -139,3 +147,16 @@ document.querySelectorAll('[data-figure]').forEach(button => {
 });
 document.querySelector('#close-dialog').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+
+
+const comparisonVideos = [...document.querySelectorAll('.comparison-video')];
+document.querySelector('#play-comparison').addEventListener('click', () => {
+  gallery.querySelectorAll('video').forEach(video => video.pause());
+  comparisonVideos.forEach(video => {
+    video.currentTime = 0;
+    video.play();
+  });
+});
+document.querySelector('#pause-comparison').addEventListener('click', () => {
+  comparisonVideos.forEach(video => video.pause());
+});
