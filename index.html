@@ -3,47 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Wrist-Camera Video Diffusion as Generalizable Robot Policies. Anonymous research project with real-world video demonstrations.">
+  <meta name="description" content="Wrist-Camera Video Diffusion as Generalizable Robot Policies">
   <meta name="color-scheme" content="light">
   <title>Wrist-Camera Video Diffusion as Generalizable Robot Policies</title>
-  <link rel="stylesheet" href="styles.css?v=franka-short1">
-  <script src="app.js?v=franka-short1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=paper-layout2">
+  <script src="app.js?v=paper-layout2" defer></script>
 </head>
 <body>
-  <a class="skip" href="#experiments">Skip to content</a>
-  <header>
-    <a class="brand" href="#top">Wrist-Camera Video Diffusion</a>
-    <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#experiments">Videos</a></nav>
-    <span class="anonymous">Anonymous submission</span>
-  </header>
-  <main id="top">
-    <section class="hero" aria-labelledby="title">
-      <h1 id="title">Wrist-Camera Video Diffusion<br class="desktop-break"> as Generalizable Robot Policies</h1>
-      <p class="authors">Anonymous Authors</p>
-      <div class="hero-links"><a href="#experiments">Watch videos <span aria-hidden="true">↓</span></a><a href="#method">Method overview <span aria-hidden="true">↓</span></a></div>
+  <a class="skip" href="#experiments">Skip to videos</a>
+  <main>
+    <section class="hero" id="top">
+      <h1>Wrist-Camera Video Diffusion<br class="desktop-break"> as Generalizable Robot Policies</h1>
+      <p class="authors">Anonymous authors</p>
+      <div class="hero-links">
+        <a href="#experiments">▶ &nbsp; Demos</a>
+        <a href="#method">Method</a>
+      </div>
     </section>
     <section id="experiments" class="section experiments">
-      <div class="section-heading"><div><h2>Real-world videos</h2></div></div>
-      <div class="platforms" role="group" aria-label="Filter videos by robot">
-        <button class="selected" data-platform="all" aria-pressed="true">All videos <span>17</span></button>
-        <button data-platform="franka" aria-pressed="false">Franka</button>
-        <button data-platform="piper" aria-pressed="false">PiperX</button>
-        <button data-platform="galaxea" aria-pressed="false">Galaxea R1 Pro</button>
+      <div class="container">
+        <h2>Real-World Demos</h2>
+        <div class="platforms" role="group" aria-label="Filter videos by robot">
+          <button class="selected" data-platform="all" aria-pressed="true">All <span>17</span></button>
+          <button data-platform="franka" aria-pressed="false">Franka</button>
+          <button data-platform="piper" aria-pressed="false">PiperX</button>
+          <button data-platform="galaxea" aria-pressed="false">Galaxea R1 Pro</button>
+        </div>
+        <div class="carousel-toolbar"><span id="video-count" aria-live="polite">1 / 17</span><div class="carousel-arrows"><button id="previous-video" aria-label="Previous video">←</button><button id="next-video" aria-label="Next video">→</button></div></div>
+        <div id="video-gallery" class="video-gallery" tabindex="0" role="region" aria-label="Multi-view task videos"></div>
+        <div id="video-dots" class="video-dots" role="group" aria-label="Choose a video"></div>
       </div>
-      <div class="carousel-toolbar"><span id="video-count" aria-live="polite">1 / 17</span><div class="carousel-arrows"><button id="previous-video" aria-label="Previous video">←</button><button id="next-video" aria-label="Next video">→</button></div></div>
-      <div id="video-gallery" class="video-gallery" tabindex="0" role="region" aria-label="Multi-view task videos"></div>
-      <div id="video-dots" class="video-dots" role="group" aria-label="Choose a video"></div>
     </section>
-    <section id="method" class="section method">
-      <div class="section-heading"><div><h2>Method</h2></div></div>
-      <button class="figure-button" data-figure="method.webp" data-title="Training and inference architecture" aria-label="Enlarge the training and inference architecture"><img src="method.webp" alt="Training distills an expert pose estimator into a stitched 3D model. Inference generates video latents from a wrist view and instruction, then predicts camera trajectory and gripper opening." loading="lazy"><span>Explore the architecture ↗</span></button>
+    <section id="abstract" class="section shade">
+      <div class="container text-container">
+        <h2>Abstract</h2>
+        <p>A generalist manipulation policy should perform new tasks, operate in unfamiliar scenes, and transfer skills across robot embodiments. We present Wrist Video Policy (WVP), a closed-loop manipulation framework that represents robot motion through wrist-camera trajectories. By estimating the wrist-camera trajectory, we can recover the corresponding end-effector poses needed for execution through a fixed hand-eye transformation. The framework combines a video generator with a pose estimator. Given a language instruction and current observations, the generator predicts how the wrist views will evolve. To recover the camera motion from these predictions, we adapt a pretrained 3D model using wrist-camera videos and trajectories from five public robot datasets. Model stitching connects the two models in the generator’s latent space, allowing the estimator to recover wrist-camera trajectories without first decoding the video into RGB frames. The resulting pose estimator transfers to Franka, PiperX, and Galaxea R1 Pro without further fine-tuning. Across tabletop and laundry-room settings, WVP generalizes to tasks ranging from precise grasping and stacking to handling deformable objects.</p>
+      </div>
     </section>
-    <section class="section comparison">
-      <div class="section-heading"><div><h2>Video generation comparison</h2></div></div>
-      <button class="figure-button" data-figure="comparison.webp" data-title="Video generation comparison" aria-label="Enlarge video generation comparison"><img src="comparison.webp" alt="Initial state and generated frame sequences from VERA-OMNI, Cosmos 3, and VPP2 for putting a pen into a paper bag." loading="lazy"><span>View the frame sequences ↗</span></button>
+    <section id="method" class="section">
+      <div class="container">
+        <h2>Method</h2>
+        <button class="figure-button" data-figure="method.webp" data-title="Training and inference architecture" aria-label="Enlarge the training and inference architecture"><img src="method.webp" alt="Stitch distillation trains a pose estimator from video latents. During inference the estimator predicts camera trajectories and gripper openings." loading="lazy"></button>
+        <p class="figure-caption">WVP estimates wrist-camera trajectories and gripper openings directly from video latents. A fixed hand-eye transformation maps the predicted camera motion to end-effector targets for closed-loop execution.</p>
+      </div>
+    </section>
+    <section class="section shade">
+      <div class="container">
+        <h2>Video Generation Comparison</h2>
+        <button class="figure-button" data-figure="comparison.webp" data-title="Video generation comparison" aria-label="Enlarge video generation comparison"><img src="comparison.webp" alt="Initial state and generated frame sequences from VERA-OMNI, Cosmos 3, and VPP2." loading="lazy"></button>
+      </div>
     </section>
   </main>
-  <footer><span>Anonymous research project</span><a href="#top">Back to top ↑</a></footer>
+  <footer><a href="#top">Back to top ↑</a></footer>
   <dialog id="figure-dialog"><div class="dialog-top"><h2 id="figure-title"></h2><button id="close-dialog" aria-label="Close enlarged figure">Close ×</button></div><img id="figure-image" alt=""></dialog>
 </body>
 </html>
