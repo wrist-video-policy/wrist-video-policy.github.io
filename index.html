@@ -6,46 +6,40 @@
   <meta name="description" content="Wrist-Camera Video Diffusion as Generalizable Robot Policies. Anonymous research project with real-world video demonstrations.">
   <meta name="color-scheme" content="light">
   <title>Wrist-Camera Video Diffusion as Generalizable Robot Policies</title>
-  <link rel="stylesheet" href="styles.css?v=franka12">
-  <script src="app.js?v=franka12" defer></script>
+  <link rel="stylesheet" href="styles.css?v=franka-short1">
+  <script src="app.js?v=franka-short1" defer></script>
 </head>
 <body>
-  <a class="skip" href="#overview">Skip to content</a>
+  <a class="skip" href="#experiments">Skip to content</a>
   <header>
     <a class="brand" href="#top">Wrist-Camera Video Diffusion</a>
-    <nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#experiments">Videos</a></nav>
+    <nav aria-label="Main navigation"><a href="#method">Method</a><a href="#experiments">Videos</a></nav>
     <span class="anonymous">Anonymous submission</span>
   </header>
   <main id="top">
     <section class="hero" aria-labelledby="title">
       <h1 id="title">Wrist-Camera Video Diffusion<br class="desktop-break"> as Generalizable Robot Policies</h1>
       <p class="authors">Anonymous Authors</p>
-      <p class="hero-summary">From generated wrist-camera video to camera trajectories and gripper control.</p>
       <div class="hero-links"><a href="#experiments">Watch videos <span aria-hidden="true">↓</span></a><a href="#method">Method overview <span aria-hidden="true">↓</span></a></div>
     </section>
     <section id="experiments" class="section experiments">
-      <div class="section-heading"><div><h2>Real-world videos</h2><p>Synchronized wrist and external camera views across robot platforms. Swipe or use the arrows to browse tasks.</p></div></div>
+      <div class="section-heading"><div><h2>Real-world videos</h2></div></div>
       <div class="platforms" role="group" aria-label="Filter videos by robot">
-        <button class="selected" data-platform="all" aria-pressed="true">All videos <span>18</span></button>
+        <button class="selected" data-platform="all" aria-pressed="true">All videos <span>17</span></button>
         <button data-platform="franka" aria-pressed="false">Franka</button>
         <button data-platform="piper" aria-pressed="false">PiperX</button>
         <button data-platform="galaxea" aria-pressed="false">Galaxea R1 Pro</button>
       </div>
-      <div class="carousel-toolbar"><span id="video-count" aria-live="polite">1 / 18</span><div class="carousel-arrows"><button id="previous-video" aria-label="Previous video">←</button><button id="next-video" aria-label="Next video">→</button></div></div>
+      <div class="carousel-toolbar"><span id="video-count" aria-live="polite">1 / 17</span><div class="carousel-arrows"><button id="previous-video" aria-label="Previous video">←</button><button id="next-video" aria-label="Next video">→</button></div></div>
       <div id="video-gallery" class="video-gallery" tabindex="0" role="region" aria-label="Multi-view task videos"></div>
       <div id="video-dots" class="video-dots" role="group" aria-label="Choose a video"></div>
     </section>
-    <section id="overview" class="section overview">
-      <div><h2>Overview</h2></div>
-      <div class="overview-copy"><p>Starting from a wrist view and a task instruction, a video model generates future observations. A pose estimator stitched into the video-latent space translates these observations into camera trajectories and gripper openings.</p><p>The demonstrations span tabletop manipulation and appliance interaction on three robot platforms.</p></div>
-    </section>
     <section id="method" class="section method">
-      <div class="section-heading"><div><h2>Method</h2></div><p>An expert pose estimator supervises the stitched model during training. At inference, generated video latents provide the visual plan.</p></div>
+      <div class="section-heading"><div><h2>Method</h2></div></div>
       <button class="figure-button" data-figure="method.webp" data-title="Training and inference architecture" aria-label="Enlarge the training and inference architecture"><img src="method.webp" alt="Training distills an expert pose estimator into a stitched 3D model. Inference generates video latents from a wrist view and instruction, then predicts camera trajectory and gripper opening." loading="lazy"><span>Explore the architecture ↗</span></button>
-      <div class="method-notes"><article><h3>Wrist-view observation</h3><p>The camera travels with the gripper, placing the interaction at the center of the visual input.</p></article><article><h3>Latent-space stitching</h3><p>A learned adapter connects video latents to the retained layers of a pose estimator.</p></article><article><h3>Motion and grasp</h3><p>Camera trajectories and gripper openings provide the outputs for downstream robot control.</p></article></div>
     </section>
     <section class="section comparison">
-      <div class="section-heading"><div><h2>Video generation comparison</h2></div><p>A qualitative comparison of generated frames for the instruction “put the pen into the paper bag.”</p></div>
+      <div class="section-heading"><div><h2>Video generation comparison</h2></div></div>
       <button class="figure-button" data-figure="comparison.webp" data-title="Video generation comparison" aria-label="Enlarge video generation comparison"><img src="comparison.webp" alt="Initial state and generated frame sequences from VERA-OMNI, Cosmos 3, and VPP2 for putting a pen into a paper bag." loading="lazy"><span>View the frame sequences ↗</span></button>
     </section>
   </main>

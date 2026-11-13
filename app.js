@@ -1,17 +1,16 @@
 const tasks = {
   franka: [
-    {title: "grip the drawer handle and pull it out", file: "franka-new-open-drawer-3", views: 2},
-    {title: "stack the bowls", file: "franka-new-stack-bowls", views: 2},
-    {title: "put the basketball in the busket", file: "franka-new-put-basketball", views: 2},
-    {title: "pick the pen in the box", file: "franka-new-pick-pen", views: 2},
-    {title: "press the switch of the socket", file: "franka-new-press-button", views: 2},
-    {title: "take the charger out of the socket board", file: "franka-new-press-charger-down", views: 3},
-    {title: "put the cap in the bowl", file: "franka-new-put-cap-in-bowl", views: 2},
-    {title: "put the cup on the green plate", file: "franka-new-put-cup-on-plate", views: 2},
-    {title: "fold the towel from the top to the bottom", file: "franka-new-fold-towel", views: 3},
-    {title: "insert the stick into the cup", file: "franka-new-insert-stick", views: 3},
-    {title: "put the chopsticks on the green plate and release the gripper", file: "franka-new-put-chopsticks", views: 3},
-    {title: "remove the plug from the socket", file: "franka-new-remove-plug-out", views: 3}
+    {title: "Open the drawer", file: "franka-short-drawer4"},
+    {title: "Stack the bowls together", file: "franka-short-stack-candidate", views: 2},
+    {title: "Put the basketball into the basket", file: "franka-short-put-basketball", views: 2},
+    {title: "Pick the pen into the box", file: "franka-short-pick-pen", views: 2},
+    {title: "Press the charger into the socket", file: "franka-short-press-charger-down", views: 2},
+    {title: "Put the cap in the bowl", file: "franka-short-put-cap-in-bowl", views: 2},
+    {title: "Put the cup on the green plate", file: "franka-short-put-cup-on-plate", views: 2},
+    {title: "Fold the towel from top to bottom", file: "franka-short-fold-towel", views: 2},
+    {title: "Insert the stick into the cup", file: "franka-short-insert-stick", views: 2},
+    {title: "Put the chopsticks on the green plate and release the gripper", file: "franka-short-put-chopsticks", views: 2},
+    {title: "Remove the plug from the socket", file: "franka-short-remove-plug-out", views: 2}
   ],
   piper: [
     {title: 'Put the vegetable on the bread', file: 'piper-bread'},
@@ -36,8 +35,8 @@ Object.entries(tasks).forEach(([platform, platformTasks]) => {
     card.dataset.robot = platform;
 
     const video = document.createElement('video');
-    video.src = `${task.file}.mp4?v=franka12`;
-    video.poster = `${task.file}.jpg?v=franka12`;
+    video.src = `${task.file}.mp4?v=franka-short1`;
+    video.poster = `${task.file}.jpg?v=franka-short1`;
     if (task.views) video.style.aspectRatio = task.views === 3 ? '16 / 3' : '32 / 9';
     video.controls = true;
     video.muted = true;
