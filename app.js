@@ -13,12 +13,16 @@ const tasks = {
     {title: "Remove the plug from the socket", file: "franka-short-remove-plug-out", views: 2}
   ],
   piper: [
+    {title: 'Wipe the plate with the towel', file: 'piper-success-wipe-plate'},
+    {title: 'Put the cube on the plate', file: 'piper-success-cube-on-plate'},
+    {title: 'Put the bread into the toaster and release it', file: 'piper-success-bread-in-toaster'},
+    {title: 'Grasp the kettle by its handle and pour water into the cup', file: 'piper-success-pour-water'},
+    {title: 'Put the bread on the black plate', file: 'piper-success-left-place-bread'},
     {title: 'Put the vegetable on the bread', file: 'piper-bread'},
     {title: 'Wipe the plate with a towel', file: 'piper-wipe'},
     {title: 'Put the chicken wing into the bowl', file: 'piper-plate'},
     {title: 'Lift the bucket with the right arm', file: 'piper-demo-lift-bucket'},
     {title: 'Put the cube on the plate', file: 'piper-demo-pick-rubik-cube'},
-    {title: 'Put the bread into the toaster and release it', file: 'piper-demo-insert-bread'},
     {title: 'Stack the cups', file: 'piper-demo-stack-cups'},
     {title: 'Put the green cube into the bowl', file: 'piper-demo-put-green-cube'},
     {title: 'Put the red cube into the bowl', file: 'piper-demo-put-red-cube-recovery'},
