@@ -1,9 +1,9 @@
 const tasks = {
   franka: [
-    {title: "Open the drawer", file: "franka-short-drawer4"},
-    {title: "Stack the bowls together", file: "franka-short-stack-candidate", views: 2},
+    {title: "Stack the bowls together", file: "franka-stack-bowls3", views: 2},
     {title: "Put the basketball into the basket", file: "franka-short-put-basketball", views: 2},
     {title: "Pick the pen into the box", file: "franka-short-pick-pen", views: 2},
+    {title: "Open the drawer", file: "franka-drawer4-uniform", views: 2},
     {title: "Press the charger into the socket", file: "franka-short-press-charger-down", views: 2},
     {title: "Put the cap in the bowl", file: "franka-short-put-cap-in-bowl", views: 2},
     {title: "Put the cup on the green plate", file: "franka-short-put-cup-on-plate", views: 2},
@@ -35,8 +35,8 @@ Object.entries(tasks).forEach(([platform, platformTasks]) => {
     card.dataset.robot = platform;
 
     const video = document.createElement('video');
-    video.src = `${task.file}.mp4?v=franka-short1`;
-    video.poster = `${task.file}.jpg?v=franka-short1`;
+    video.src = `${task.file}.mp4?v=franka-update2`;
+    video.poster = `${task.file}.jpg?v=franka-update2`;
     if (task.views) video.style.aspectRatio = task.views === 3 ? '16 / 3' : '32 / 9';
     video.controls = true;
     video.muted = true;

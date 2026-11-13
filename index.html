@@ -7,7 +7,7 @@
   <meta name="color-scheme" content="light">
   <title>Wrist-Camera Video Diffusion as Generalizable Robot Policies</title>
   <link rel="stylesheet" href="styles.css?v=paper-layout2">
-  <script src="app.js?v=paper-layout2" defer></script>
+  <script src="app.js?v=main-paper3" defer></script>
 </head>
 <body>
   <a class="skip" href="#experiments">Skip to videos</a>
@@ -16,8 +16,7 @@
       <h1>Wrist-Camera Video Diffusion<br class="desktop-break"> as Generalizable Robot Policies</h1>
       <p class="authors">Anonymous authors</p>
       <div class="hero-links">
-        <a href="#experiments">▶ &nbsp; Demos</a>
-        <a href="#method">Method</a>
+        <a href="https://github.com/wrist-video-policy/WVP" target="_blank" rel="noopener noreferrer">Code</a>
       </div>
     </section>
     <section id="experiments" class="section experiments">
@@ -49,8 +48,14 @@
     </section>
     <section class="section shade">
       <div class="container">
-        <h2>Video Generation Comparison</h2>
-        <button class="figure-button" data-figure="comparison.webp" data-title="Video generation comparison" aria-label="Enlarge video generation comparison"><img src="comparison.webp" alt="Initial state and generated frame sequences from VERA-OMNI, Cosmos 3, and VPP2." loading="lazy"></button>
+        <h2>Recovery from Execution Deviations</h2>
+        <button class="figure-button" data-figure="recovery.webp" data-title="Recovery from execution deviations" aria-label="Enlarge recovery examples"><img src="recovery.webp" alt="PiperX retries a grasp after displacing a block, and Galaxea realigns its gripper after missing a recessed door handle." loading="lazy"></button>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <h2>Effect of Model Stitching</h2>
+        <button class="figure-button" data-figure="stitch-effect.webp" data-title="Effect of model stitching" aria-label="Enlarge model stitching results"><img src="stitch-effect.webp" alt="Generated and executed wrist views, estimated camera trajectories, and PiperX task success with and without model stitching." loading="lazy"></button>
       </div>
     </section>
   </main>
