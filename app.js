@@ -1,8 +1,17 @@
 const tasks = {
   franka: [
-    {title: 'Place the ball in the basket', file: 'franka-basket'},
-    {title: 'Stack the bowls', file: 'franka-bowls'},
-    {title: 'Open the drawer', file: 'franka-drawer'}
+    {title: "grip the drawer handle and pull it out", file: "franka-new-open-drawer-3", views: 2},
+    {title: "stack the bowls", file: "franka-new-stack-bowls", views: 2},
+    {title: "put the basketball in the busket", file: "franka-new-put-basketball", views: 2},
+    {title: "pick the pen in the box", file: "franka-new-pick-pen", views: 2},
+    {title: "press the switch of the socket", file: "franka-new-press-button", views: 2},
+    {title: "take the charger out of the socket board", file: "franka-new-press-charger-down", views: 3},
+    {title: "put the cap in the bowl", file: "franka-new-put-cap-in-bowl", views: 2},
+    {title: "put the cup on the green plate", file: "franka-new-put-cup-on-plate", views: 2},
+    {title: "fold the towel from the top to the bottom", file: "franka-new-fold-towel", views: 3},
+    {title: "insert the stick into the cup", file: "franka-new-insert-stick", views: 3},
+    {title: "put the chopsticks on the green plate and release the gripper", file: "franka-new-put-chopsticks", views: 3},
+    {title: "remove the plug from the socket", file: "franka-new-remove-plug-out", views: 3}
   ],
   piper: [
     {title: 'Put the vegetable on the bread', file: 'piper-bread'},
@@ -27,8 +36,9 @@ Object.entries(tasks).forEach(([platform, platformTasks]) => {
     card.dataset.robot = platform;
 
     const video = document.createElement('video');
-    video.src = `${task.file}.mp4?v=multiview1`;
-    video.poster = `${task.file}.jpg?v=multiview1`;
+    video.src = `${task.file}.mp4?v=franka12`;
+    video.poster = `${task.file}.jpg?v=franka12`;
+    if (task.views) video.style.aspectRatio = task.views === 3 ? '16 / 3' : '32 / 9';
     video.controls = true;
     video.muted = true;
     video.loop = true;
@@ -44,7 +54,7 @@ Object.entries(tasks).forEach(([platform, platformTasks]) => {
     const caption = document.createElement('div');
     caption.className = 'video-caption';
     const robot = document.createElement('p');
-    robot.textContent = `${platformNames[platform]} · ${platform === 'franka' ? 'Wrist + external view' : 'Two wrists + external view'}`;
+    robot.textContent = `${platformNames[platform]} · ${platform === 'franka' ? (task.views === 3 ? 'Wrist + two external views' : 'Wrist + external view') : 'Two wrists + external view'}`;
     const title = document.createElement('h3');
     title.textContent = task.title;
     caption.append(robot, title);
