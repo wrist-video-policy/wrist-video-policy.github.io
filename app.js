@@ -3,36 +3,38 @@ const tasks = {
     {title: "Stack the bowls together", file: "franka-stack-bowls3", views: 2},
     {title: "Put the basketball into the basket", file: "franka-short-put-basketball", views: 2},
     {title: "Pick the pen into the box", file: "franka-short-pick-pen", views: 2},
-    {title: "Open the drawer", file: "franka-drawer4-uniform", views: 2},
+    {title: "Open the drawer", file: "franka-drawer4-4s", views: 2},
     {title: "Press the charger into the socket", file: "franka-short-press-charger-down", views: 2},
     {title: "Put the cap in the bowl", file: "franka-short-put-cap-in-bowl", views: 2},
     {title: "Put the cup on the green plate", file: "franka-short-put-cup-on-plate", views: 2},
     {title: "Fold the towel from top to bottom", file: "franka-short-fold-towel", views: 2},
-    {title: "Insert the stick into the cup", file: "franka-short-insert-stick", views: 2},
+    {title: "Insert the stick into the cup", file: "franka-insert-stick-5s", views: 2},
     {title: "Put the chopsticks on the green plate and release the gripper", file: "franka-short-put-chopsticks", views: 2},
     {title: "Remove the plug from the socket", file: "franka-short-remove-plug-out", views: 2}
   ],
   piper: [
+    {title: 'Use the left gripper to put the bread on the black plate, then use the right gripper to put the vegetable on the bread', file: 'piper-bimanual-bread-vegetable'},
+    {title: 'Grasp both handles of the basket and lift it with both hands', file: 'piper-success-lift-basket-both-hands'},
     {title: 'Wipe the plate with the towel', file: 'piper-success-wipe-plate'},
-    {title: 'Put the cube on the plate', file: 'piper-success-cube-on-plate'},
-    {title: 'Put the bread into the toaster and release it', file: 'piper-success-bread-in-toaster'},
+    {title: 'Put the rubik’s cube on the plate', file: 'piper-success-cube-on-plate'},
+    {title: 'Insert the bread into the toaster then release the bread', file: 'piper-success-bread-in-toaster'},
     {title: 'Grasp the kettle by its handle and pour water into the cup', file: 'piper-success-pour-water'},
     {title: 'Put the bread on the black plate', file: 'piper-success-left-place-bread'},
     {title: 'Put the vegetable on the bread', file: 'piper-bread'},
-    {title: 'Wipe the plate with a towel', file: 'piper-wipe'},
+    {title: 'Wipe the plate with the towel', file: 'piper-wipe'},
     {title: 'Put the chicken wing into the bowl', file: 'piper-plate'},
     {title: 'Lift the bucket with the right arm', file: 'piper-demo-lift-bucket'},
-    {title: 'Put the cube on the plate', file: 'piper-demo-pick-rubik-cube'},
+    {title: 'Put the rubik’s cube on the plate', file: 'piper-demo-pick-rubik-cube'},
     {title: 'Stack the cups', file: 'piper-demo-stack-cups'},
     {title: 'Put the green cube into the bowl', file: 'piper-demo-put-green-cube'},
     {title: 'Put the red cube into the bowl', file: 'piper-demo-put-red-cube-recovery'},
     {title: 'Put the vegetable on the bread', file: 'piper-demo-put-vegetable-2'}
   ],
   galaxea: [
-    {title: 'Open the washer door', file: 'galaxea-door'},
-    {title: 'Grasp and hold the knob', file: 'galaxea-knob'},
-    {title: 'Pick up fallen clothes', file: 'galaxea-laundry'},
-    {title: 'Take the clothes out of the washing machine', file: 'galaxea-take-clothes'}
+    {title: 'Open the washing machine door', file: 'galaxea-door-soft-background'},
+    {title: 'Grip the knob and maintain the grasping posture', file: 'galaxea-knob-soft-background'},
+    {title: 'Pick up the fallen clothes from the floor', file: 'galaxea-laundry-soft-background'},
+    {title: 'Take the clothes out of the washing machine', file: 'galaxea-take-clothes-soft-background'}
   ]
 };
 
