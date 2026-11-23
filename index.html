@@ -22,7 +22,7 @@
     <section id="experiments" class="section experiments">
       <div class="container">
         <h2>Real-World Demos</h2>
-        <p class="section-intro">WVP evaluates 12 tasks across Franka Panda, PiPER-X, and Galaxea R1 Pro, using the same stitched pose estimator without further fine-tuning. The video generator is used directly on Franka and PiPER-X; for Galaxea, it is adapted using task-specific RGB recordings.</p>
+        <p class="section-intro"></p>
         <div class="platforms" role="group" aria-label="Filter videos by robot">
           <button class="selected" data-platform="all" aria-pressed="true">All</button>
           <button data-platform="franka" aria-pressed="false">Franka</button>
@@ -49,7 +49,7 @@
     </section>
     <section class="section shade">
       <div class="container">
-        <h2>Recovery from Execution Deviations</h2>
+        <h2>Comparison with Baselines</h2><p class="section-intro">We compare WVP with VERA, Cosmos 3, and π0.5 on four Franka manipulation tasks under the same evaluation conditions. Each bar reports success over 10 trials. WVP pairs the VERA-DROID or Cosmos3-Nano-DROID video backbone with the stitched wrist-camera pose estimator.</p><button class="figure-button" data-figure="baseline-comparison.png" data-title="Comparison with baselines on Franka" aria-label="Enlarge comparison with baselines"><img src="baseline-comparison.png" alt="Success rates for WVP and baseline policies on four Franka manipulation tasks." loading="lazy"></button><h2>Recovery from Execution Deviations</h2>
         <p class="section-intro">Conditioning each new prediction on the latest observation allows the robot to adjust and retry after execution errors, including a displaced block or a missed washing-machine handle.</p>
         <button class="figure-button" data-figure="recovery.webp" data-title="Recovery from execution deviations" aria-label="Enlarge recovery examples"><img src="recovery.webp" alt="PiperX retries a grasp after displacing a block, and Galaxea realigns its gripper after missing a recessed door handle." loading="lazy"></button>
       </div>
