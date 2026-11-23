@@ -1,2 +1,5 @@
-# wrist-video-policy.github.io
-Anonymous project page for Wrist Video Policy
+# Wrist Video Policy
+
+Project website for Wrist-Camera Video Diffusion as Generalizable Robot Policies.
+
+https://wrist-video-policy.github.io/

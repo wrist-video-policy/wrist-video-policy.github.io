@@ -1,83 +1,74 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Wrist-Camera Video Diffusion as Generalizable Robot Policies">
-  <meta name="color-scheme" content="light">
-  <title>Wrist-Camera Video Diffusion as Generalizable Robot Policies</title>
-  <link rel="stylesheet" href="styles.css?v=background-20261123">
-  <script src="app.js?v=demo-refinements6" defer></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Wrist Video Policy connects video prediction and 3D geometry through wrist-camera motion. Explore real-robot demonstrations across Franka Panda, PiPER-X, and Galaxea R1 Pro.">
+<meta name="theme-color" content="#f5faff"><meta name="color-scheme" content="light dark">
+<title>Wrist Video Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=showcase-20261123"><script src="app.js?v=showcase-20261123" defer></script>
 </head>
 <body>
-  <a class="skip" href="#experiments">Skip to videos</a>
-  <main>
-    <section class="hero" id="top">
-      <h1>Wrist-Camera Video Diffusion<br class="desktop-break"> as Generalizable Robot Policies</h1>
-      <p class="authors">Anonymous authors</p>
-      <div class="hero-links">
-        <a href="https://github.com/wrist-video-policy/WVP" target="_blank" rel="noopener noreferrer">Code</a>
-      </div>
-    </section>
-    <section id="experiments" class="section experiments">
-      <div class="container">
-        <h2>Real-World Demos</h2>
-        <p class="section-intro"></p>
-        <div class="platforms" role="group" aria-label="Filter videos by robot">
-          <button class="selected" data-platform="all" aria-pressed="true">All</button>
-          <button data-platform="franka" aria-pressed="false">Franka</button>
-          <button data-platform="piper" aria-pressed="false">PiperX</button>
-          <button data-platform="galaxea" aria-pressed="false">Galaxea R1 Pro</button>
-        </div>
-        <div class="carousel-toolbar"><span id="video-count" hidden></span><div class="carousel-arrows"><button id="previous-video" aria-label="Previous video">←</button><button id="next-video" aria-label="Next video">→</button></div></div>
-        <div id="video-gallery" class="video-gallery" tabindex="0" role="region" aria-label="Multi-view task videos"></div>
-        <div id="video-dots" class="video-dots" role="group" aria-label="Choose a video"></div>
-      </div>
-    </section>
-    <section id="abstract" class="section shade">
-      <div class="container text-container">
-        <h2>Abstract</h2>
-        <p>Wrist Video Policy (WVP) is a closed-loop manipulation framework that combines video prediction with geometric motion estimation. Given a task instruction and current observations, a video generator predicts future wrist views. A pose estimator adapted from a pretrained 3D model recovers wrist-camera trajectories and gripper commands; a fixed hand-eye transformation maps camera poses to executable end-effector targets. Model stitching connects predicted video latents directly to intermediate pose-estimator features, bypassing RGB decoding. The resulting estimator transfers across Franka Panda, PiPER-X, and Galaxea R1 Pro without further fine-tuning, supporting zero-shot manipulation across tasks and scenes.</p>
-      </div>
-    </section>
-    <section id="method" class="section">
-      <div class="container">
-        <h2>Method</h2>
-        <button class="figure-button" data-figure="method.webp" data-title="Training and inference architecture" aria-label="Enlarge the training and inference architecture"><img src="method.webp" alt="Stitch distillation trains a pose estimator from video latents. During inference the estimator predicts camera trajectories and gripper openings." loading="lazy"></button>
-        <p class="figure-caption">A frozen RGB pose expert supervises the stitched pose estimator. At inference, the video generator predicts future latents, and the stitched model estimates camera trajectories and gripper openings. A fixed hand-eye transformation maps camera motion to end-effector targets; the robot executes a short horizon and replans from new observations.</p>
-      </div>
-    </section>
-    <section class="section shade">
-      <div class="container">
-        <h2>Comparison with Baselines</h2><p class="section-intro">We compare WVP with VERA, Cosmos 3, and π0.5 on four Franka manipulation tasks under the same evaluation conditions. Each bar reports success over 10 trials. WVP pairs the VERA-DROID or Cosmos3-Nano-DROID video backbone with the stitched wrist-camera pose estimator.</p><button class="figure-button" data-figure="baseline-comparison.png" data-title="Comparison with baselines on Franka" aria-label="Enlarge comparison with baselines"><img src="baseline-comparison.png" alt="Success rates for WVP and baseline policies on four Franka manipulation tasks." loading="lazy"></button><h2>Recovery from Execution Deviations</h2>
-        <p class="section-intro">Conditioning each new prediction on the latest observation allows the robot to adjust and retry after execution errors, including a displaced block or a missed washing-machine handle.</p>
-        <button class="figure-button" data-figure="recovery.webp" data-title="Recovery from execution deviations" aria-label="Enlarge recovery examples"><img src="recovery.webp" alt="PiperX retries a grasp after displacing a block, and Galaxea realigns its gripper after missing a recessed door handle." loading="lazy"></button>
-      </div>
-    </section>
-    <section class="section">
-      <div class="container">
-        <h2>Effect of Model Stitching</h2>
-        <p class="section-intro">Model stitching maps predicted video latents into the pose estimator, bypassing RGB decoding. The paired executions below compare a baseline without stitching and the stitched model on the same task.</p>
-        <div class="comparison-header">
-          <h3>Put the vegetable on the bread</h3>
-          <div class="comparison-controls"><button id="play-comparison">Play both</button><button id="pause-comparison">Pause both</button></div>
-        </div>
-        <div class="comparison-grid">
-          <article class="comparison-card">
-            <h3>Non-stitch</h3>
-            <video class="comparison-video" src="comparison-non-stitch.mp4" poster="comparison-non-stitch.jpg" controls muted playsinline preload="metadata" aria-label="Non-stitch execution, right wrist and external view"></video>
-          </article>
-          <article class="comparison-card">
-            <h3>Stitch</h3>
-            <video class="comparison-video" src="comparison-stitch.mp4" poster="comparison-stitch.jpg" controls muted playsinline preload="metadata" aria-label="Stitch execution, right wrist and external view"></video>
-          </article>
-        </div>
-        <p class="comparison-note">Recorded executions · Right wrist + external view</p>
-        <button class="figure-button" data-figure="stitch-effect.webp" data-title="Effect of model stitching" aria-label="Enlarge model stitching results"><img src="stitch-effect.webp" alt="Generated and executed wrist views, estimated camera trajectories, and PiperX task success with and without model stitching." loading="lazy"></button>
-      </div>
-    </section>
-  </main>
-  <footer><a href="#top">Back to top ↑</a></footer>
-  <dialog id="figure-dialog"><div class="dialog-top"><h2 id="figure-title"></h2><button id="close-dialog" aria-label="Close enlarged figure">Close ×</button></div><img id="figure-image" alt=""></dialog>
-</body>
-</html>
+<a class="skip" href="#experiments">Skip to demos</a>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="ambient ambient-a" aria-hidden="true"></div><div class="ambient ambient-b" aria-hidden="true"></div>
+<header class="topbar"><a href="#top" class="wordmark" aria-label="Wrist Video Policy home">WVP<span>Wrist Video Policy</span></a><nav aria-label="Main navigation"><a href="#experiments">Demos</a><a href="#method">Method</a><a href="#results">Results</a><button id="theme-toggle" aria-label="Switch to dark theme" title="Switch theme">Dark</button></nav></header>
+<main>
+<section class="hero" id="top">
+  <p class="eyebrow">Wrist Video Policy</p>
+  <h1><span class="title-blue">Wrist-Camera Video Diffusion</span><br>as Generalizable Robot Policies</h1>
+  <div id="research-team">
+<div class="authors"><span><a href="https://jerryliujy.github.io/">Jingyuan Liu</a><sup>1,2</sup></span><span>Yongwei Chen<sup>1,3</sup></span><span>Yishan Yang<sup>1,4</sup></span><span>Zexin He<sup>1,3</sup></span><span>Xingang Pan<sup>3,*</sup></span><span>Zhi Hou<sup>1,*</sup></span></div>
+<div class="affiliations"><span><sup>1</sup> ACE Robotics</span><span><sup>2</sup> Fudan University</span><span><sup>3</sup> Nanyang Technological University</span><span><sup>4</sup> Southeast University</span></div>
+<p class="corresponding">* Corresponding authors</p>
+<div class="institution-logos" aria-label="Affiliated institutions"><a href="https://www.acerobotics.com/en/" aria-label="ACE Robotics"><img src="logo-ace.svg" alt="ACE Robotics"></a><a href="https://www.fudan.edu.cn/en/" aria-label="Fudan University"><img src="logo-fudan.png" alt="Fudan University"></a><a href="https://www.ntu.edu.sg/" aria-label="Nanyang Technological University"><img src="logo-ntu.png" alt="Nanyang Technological University"></a><a href="https://www.seu.edu.cn/english/" aria-label="Southeast University"><img src="logo-seu.svg" alt="Southeast University"></a></div>
+</div>
+  <div class="hero-links"><a class="button primary" href="https://github.com/wrist-video-policy/WVP" target="_blank" rel="noopener">Code</a></div>
+
+  <div class="teaser-wrap"><button class="figure-button teaser" data-figure="teaser.png" data-title="Wrist Video Policy" aria-label="Enlarge Wrist Video Policy overview"><img src="teaser.png" alt="Wrist video prediction and 3D geometric priors connect through wrist-camera motion and transfer across robot embodiments." fetchpriority="high"></button></div>
+</section>
+<section id="experiments" class="section experiments"><div class="container">
+<div class="section-heading"><div><p class="eyebrow small">IN THE REAL WORLD</p><h2>Real-world demonstrations</h2></div><div class="playback-controls"><button id="play-demos">Play visible demos</button><button id="pause-demos">Pause demos</button></div></div>
+<div class="platforms" role="group" aria-label="Filter demonstrations"><button class="selected" data-platform="all" aria-pressed="true">All robots</button><button data-platform="franka" aria-pressed="false">Franka Panda</button><button data-platform="piper" aria-pressed="false">PiPER-X</button><button data-platform="galaxea" aria-pressed="false">Galaxea R1 Pro</button></div>
+<div id="video-gallery"></div>
+</div></section>
+
+<section id="method" class="section section-method"><div class="container">
+<div class="section-heading"><div><p class="eyebrow small">THE CORE IDEA</p><h2>A shared interface<br>through wrist-camera motion.</h2></div><p class="heading-copy">Video prediction captures how a task unfolds.<br>3D geometry turns that prediction into motion.</p></div>
+<div class="method-intro"><p>Robot embodiments differ in kinematics, appearance, and action spaces. A wrist camera offers a common reference: because it is rigidly attached to the end effector, its trajectory determines the corresponding end-effector motion through a fixed hand-eye transformation.</p><p>WVP pairs a video generator with a pose estimator adapted from a pretrained 3D model. <strong>Model stitching</strong> connects the generator’s predicted latents directly to the estimator’s intermediate features, recovering camera trajectories and gripper states without first decoding RGB frames.</p></div>
+<button class="figure-button" data-figure="method-overview.png" data-title="WVP training and inference" aria-label="Enlarge training and inference"><img src="method-overview.png" alt="The RGB expert supervises a stitched model during training. At inference, predicted video latents become camera and gripper estimates, which are converted to robot actions." loading="lazy"></button>
+<div class="method-steps"><article><h3>Predict future wrist views</h3><p>The video generator conditions on the current observations and task instruction, producing a visual plan in latent space.</p></article><article><h3>Recover geometric motion</h3><p>A learned adapter maps video latents into the pose estimator. Camera and gripper heads recover the trajectory and gripper commands for each arm.</p></article><article><h3>Execute, observe, replan</h3><p>Hand-eye calibration and inverse kinematics convert camera motion to joint targets. The robot executes a short action segment, then replans from new observations.</p></article></div>
+<div class="training-note"><h3>How the estimator learns</h3><p>We first adapt a pretrained 3D model using wrist-camera videos and trajectories from five public robot datasets. The resulting RGB expert then supervises the stitched estimator on VAE-encoded videos. This distillation transfers the expert’s motion estimates to latent inputs without additional action labels.</p></div>
+</div></section>
+<section id="results" class="section shade"><div class="container">
+<p class="eyebrow small">REAL-WORLD EVALUATION</p><h2>One pose estimator.<br>Three robot embodiments.</h2>
+<p class="section-intro">We evaluate manipulation across tabletop and laundry-room scenes, including articulated fixtures, transparent objects, and deformable materials. The pose estimator trained on public robot data is reused across Franka Panda, PiPER-X, and Galaxea R1 Pro without further fine-tuning.</p>
+<div class="results-metrics"><div><strong>72.5<span>%</span></strong><span>Galaxea R1 Pro</span></div><div><strong>52.5<span>%</span></strong><span>Franka Panda</span></div><div><strong>50.0<span>%</span></strong><span>PiPER-X</span></div></div>
+<p class="metric-note">Mean task success · Four tasks per robot · Ten trials per task</p>
+<button class="figure-button" data-figure="evaluation.png" data-title="Real-world evaluation" aria-label="Enlarge experimental setup and success rates"><img src="evaluation.png" alt="Robot setups and success rates across twelve evaluated tasks on Galaxea R1 Pro, Franka Panda, and PiPER-X." loading="lazy"></button>
+</div></section>
+<section class="section"><div class="container">
+<p class="eyebrow small">COMPARISON WITH BASELINES</p><h2>Turning video predictions<br>into effective robot actions.</h2>
+<p class="section-intro">On four Franka Panda tasks, we compare WVP with VERA, Cosmos3-Nano-DROID, and π0.5 using the same robot setup, camera configuration, and evaluation protocol. Each bar reports success over ten trials.</p>
+<button class="figure-button" data-figure="baseline-comparison.png" data-title="Comparison with baseline policies" aria-label="Enlarge baseline comparison"><img src="baseline-comparison.png" alt="Success rates on stack bowls, put basketball, pick pen, and open drawer, comparing WVP with VERA, Cosmos 3, and pi 0.5." loading="lazy"></button>
+<div class="result-explanation"><div><h3>With VERA-DROID</h3><p>Using the same video generator, WVP achieves higher task success than VERA’s Jacobian inverse dynamics model on all four tasks. It also outperforms π0.5 and performs comparably to Cosmos3-Nano-DROID.</p></div><div><h3>With Cosmos3-Nano-DROID</h3><p>We retrain the stitched estimator for the underlying Wan2.2 latent representation. Paired with this video backbone, WVP again improves over the model’s original action head.</p></div></div>
+</div></section>
+<section id="stitching" class="section shade"><div class="container">
+<p class="eyebrow small">WHY MODEL STITCHING?</p><h2>The same visual plan.<br>A different recovered motion.</h2>
+<p class="section-intro">The RGB expert and stitched estimator receive the same video prediction in different forms: decoded frames versus predicted latents. In the lettuce task, the RGB expert estimates mostly forward motion with insufficient descent. The stitched estimator recovers the downward reach needed to grasp the lettuce.</p>
+<button class="figure-button" data-figure="stitch-effect.webp" data-title="Effect of model stitching" aria-label="Enlarge model stitching results"><img src="stitch-effect.webp" alt="Camera trajectories and task success with and without stitching on the same PiPER-X task." loading="lazy"></button>
+<div class="comparison-header"><h3>Put the vegetable on the bread</h3><div class="comparison-controls"><button id="play-comparison">Play both</button><button id="pause-comparison">Pause both</button></div></div>
+<div class="comparison-grid"><article class="comparison-card"><h3>Non-stitch <span>RGB expert on decoded frames</span></h3><video class="comparison-video" src="comparison-non-stitch.mp4" poster="comparison-non-stitch.jpg" controls muted playsinline preload="none" aria-label="Non-stitch execution"></video></article><article class="comparison-card"><h3>Stitch <span>Pose estimation from predicted latents</span></h3><video class="comparison-video" src="comparison-stitch.mp4" poster="comparison-stitch.jpg" controls muted playsinline preload="none" aria-label="Stitched execution"></video></article></div>
+<p class="comparison-note">Across ten trials: 0/10 without stitching, 4/10 with stitching.</p>
+</div></section>
+<section class="section"><div class="container">
+<p class="eyebrow small">CLOSED-LOOP RECOVERY</p><h2>Observe the outcome.<br>Adjust the next prediction.</h2>
+<p class="section-intro">Execution can deviate from the original visual plan. Replanning from fresh observations lets WVP respond to the state the robot actually reaches.</p>
+<button class="figure-button" data-figure="recovery.webp" data-title="Recovery from execution deviations" aria-label="Enlarge recovery examples"><img src="recovery.webp" alt="PiPER-X retries after displacing a block; Galaxea realigns after missing the washer door handle." loading="lazy"></button>
+<div class="result-explanation"><div><h3>Retry after a displaced grasp</h3><p>PiPER-X closes its gripper too early and moves the block. From the updated wrist view, it reopens the gripper, approaches again, and completes the grasp.</p></div><div><h3>Realign with a recessed handle</h3><p>Galaxea misses the washing-machine handle on its initial approach. Subsequent predictions realign the gripper with the recess before opening the door.</p></div></div>
+</div></section>
+</main>
+<footer><a class="wordmark" href="#top">WVP</a><span>Wrist-Camera Video Diffusion as Generalizable Robot Policies</span><a href="#top">Back to top</a></footer>
+<dialog id="figure-dialog"><div class="dialog-top"><h2 id="figure-title"></h2><button id="close-dialog" aria-label="Close enlarged figure">Close</button></div><img id="figure-image" alt=""></dialog>
+</body></html>
