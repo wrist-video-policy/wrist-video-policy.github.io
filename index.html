@@ -22,7 +22,7 @@
     <section id="experiments" class="section experiments">
       <div class="container">
         <h2>Real-World Demos</h2>
-        <p class="section-intro">WVP transfers wrist-camera motion across Franka, PiperX, and Galaxea R1 Pro, from tabletop manipulation to laundry-room tasks.</p>
+        <p class="section-intro">WVP evaluates 12 tasks across Franka Panda, PiPER-X, and Galaxea R1 Pro, using the same stitched pose estimator without further fine-tuning. The video generator is used directly on Franka and PiPER-X; for Galaxea, it is adapted using task-specific RGB recordings.</p>
         <div class="platforms" role="group" aria-label="Filter videos by robot">
           <button class="selected" data-platform="all" aria-pressed="true">All</button>
           <button data-platform="franka" aria-pressed="false">Franka</button>
@@ -37,27 +37,27 @@
     <section id="abstract" class="section shade">
       <div class="container text-container">
         <h2>Abstract</h2>
-        <p>A generalist manipulation policy should perform new tasks, operate in unfamiliar scenes, and transfer skills across robot embodiments. We present Wrist Video Policy (WVP), a closed-loop manipulation framework that represents robot motion through wrist-camera trajectories. By estimating the wrist-camera trajectory, we can recover the corresponding end-effector poses needed for execution through a fixed hand-eye transformation. The framework combines a video generator with a pose estimator. Given a language instruction and current observations, the generator predicts how the wrist views will evolve. To recover the camera motion from these predictions, we adapt a pretrained 3D model using wrist-camera videos and trajectories from five public robot datasets. Model stitching connects the two models in the generator’s latent space, allowing the estimator to recover wrist-camera trajectories without first decoding the video into RGB frames. The resulting pose estimator transfers to Franka, PiperX, and Galaxea R1 Pro without further fine-tuning. Across tabletop and laundry-room settings, WVP generalizes to tasks ranging from precise grasping and stacking to handling deformable objects.</p>
+        <p>Wrist Video Policy (WVP) is a closed-loop manipulation framework that combines video prediction with geometric motion estimation. Given a task instruction and current observations, a video generator predicts future wrist views. A pose estimator adapted from a pretrained 3D model recovers wrist-camera trajectories and gripper commands; a fixed hand-eye transformation maps camera poses to executable end-effector targets. Model stitching connects predicted video latents directly to intermediate pose-estimator features, bypassing RGB decoding. The resulting estimator transfers across Franka Panda, PiPER-X, and Galaxea R1 Pro without further fine-tuning, supporting zero-shot manipulation across tasks and scenes.</p>
       </div>
     </section>
     <section id="method" class="section">
       <div class="container">
         <h2>Method</h2>
         <button class="figure-button" data-figure="method.webp" data-title="Training and inference architecture" aria-label="Enlarge the training and inference architecture"><img src="method.webp" alt="Stitch distillation trains a pose estimator from video latents. During inference the estimator predicts camera trajectories and gripper openings." loading="lazy"></button>
-        <p class="figure-caption">WVP estimates wrist-camera trajectories and gripper openings directly from video latents. A fixed hand-eye transformation maps the predicted camera motion to end-effector targets for closed-loop execution.</p>
+        <p class="figure-caption">A frozen RGB pose expert supervises the stitched pose estimator. At inference, the video generator predicts future latents, and the stitched model estimates camera trajectories and gripper openings. A fixed hand-eye transformation maps camera motion to end-effector targets; the robot executes a short horizon and replans from new observations.</p>
       </div>
     </section>
     <section class="section shade">
       <div class="container">
         <h2>Recovery from Execution Deviations</h2>
-        <p class="section-intro">New observations guide the next prediction, allowing the robot to adjust its grasp and retry during execution.</p>
+        <p class="section-intro">Conditioning each new prediction on the latest observation allows the robot to adjust and retry after execution errors, including a displaced block or a missed washing-machine handle.</p>
         <button class="figure-button" data-figure="recovery.webp" data-title="Recovery from execution deviations" aria-label="Enlarge recovery examples"><img src="recovery.webp" alt="PiperX retries a grasp after displacing a block, and Galaxea realigns its gripper after missing a recessed door handle." loading="lazy"></button>
       </div>
     </section>
     <section class="section">
       <div class="container">
         <h2>Effect of Model Stitching</h2>
-        <p class="section-intro">Model stitching estimates wrist-camera motion directly from video latents, improving alignment between the visual plan and executed motion.</p>
+        <p class="section-intro">Model stitching maps predicted video latents into the pose estimator, bypassing RGB decoding. The paired executions below compare a baseline without stitching and the stitched model on the same task.</p>
         <div class="comparison-header">
           <h3>Put the vegetable on the bread</h3>
           <div class="comparison-controls"><button id="play-comparison">Play both</button><button id="pause-comparison">Pause both</button></div>
