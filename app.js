@@ -3,7 +3,7 @@ const tasks = {
     {title: "Stack the bowls together", file: "franka-stack-bowls3", views: 2},
     {title: "Put the basketball into the basket", file: "franka-short-put-basketball", views: 2},
     {title: "Pick the pen into the box", file: "franka-short-pick-pen", views: 2},
-    {title: "Open the drawer", file: "franka-drawer4-4s", views: 2},
+    {title: "Open the drawer", file: "franka-drawer4-uniform", views: 2},
     {title: "Press the plug into the socket", file: "franka-short-press-charger-down", views: 2},
     {title: "Put the cap in the bowl", file: "franka-short-put-cap-in-bowl", views: 2},
     {title: "Put the cup on the green plate", file: "franka-short-put-cup-on-plate", views: 2},
