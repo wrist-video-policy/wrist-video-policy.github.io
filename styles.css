@@ -84,3 +84,17 @@ dialog img { width:100%; max-height:75vh; object-fit:contain; }
  .comparison-header { flex-direction:column; align-items:flex-start; }
  .comparison-header h3 { font-size:18px; }
 }
+
+
+/* Soft geometric texture, inspired by wrist-camera trajectories. */
+body { background: radial-gradient(ellipse 760px 370px at 8% 0%, rgba(111,181,226,.16), transparent 72%), radial-gradient(ellipse 680px 420px at 96% 5%, rgba(95,192,194,.11), transparent 70%), #fff; }
+.hero { position:relative; isolation:isolate; }
+.hero::before { content:""; position:absolute; z-index:-1; inset:0 -12vw; pointer-events:none; background:radial-gradient(circle, rgba(66,126,173,.24) 1px, transparent 1.6px) 0 0 / 24px 24px, radial-gradient(ellipse 490px 220px at 50% 22%, rgba(255,255,255,.98), rgba(255,255,255,.65) 65%, transparent); -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 36%, #000 2%, transparent 90%); mask-image:radial-gradient(ellipse 80% 80% at 50% 36%, #000 2%, transparent 90%); opacity:.52; }
+.hero h1 { color:#102a50; }
+.hero-links a { background:#173654; box-shadow:0 4px 12px rgba(25,69,101,.12); }
+.hero-links a:hover { background:#24577a; }
+.experiments { background:linear-gradient(180deg, rgba(238,247,253,.48), rgba(255,255,255,.8) 48%, #fff); }
+.shade { background:radial-gradient(ellipse 580px 300px at 96% 10%, rgba(146,208,223,.12), transparent 72%), linear-gradient(135deg, #f6fafd, #f3f8fb 58%, #f8fbfd); border-block:1px solid rgba(82,142,176,.10); }
+.video-card, .comparison-card { border-color:#d8e4ec; box-shadow:0 12px 34px rgba(26,72,104,.08); }
+.platforms button.selected { background:#eaf5fb; border-color:#89b6d0; color:#15577c; }
+@media (max-width:600px) { .hero::before { inset-inline:-12px; } }
