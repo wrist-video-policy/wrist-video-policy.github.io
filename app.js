@@ -78,12 +78,6 @@ const mediaObserver = new IntersectionObserver(entries => {
   }
 },{rootMargin:'120px'});
 demoVideos.forEach(video => mediaObserver.observe(video));
-function visibleVideos() {
-  return demoVideos.filter(video => {
-    const box = video.getBoundingClientRect();
-    return !video.closest('.robot-group').hidden && box.top < innerHeight && box.bottom > 0;
-  });
-}
 document.querySelectorAll('[data-platform]').forEach(button => {
   button.addEventListener('click', () => {
     document.querySelectorAll('[data-platform]').forEach(item => {
@@ -96,8 +90,6 @@ document.querySelectorAll('[data-platform]').forEach(button => {
     demoVideos.forEach(video => video.pause());
   });
 });
-document.querySelector('#play-demos').addEventListener('click',()=>visibleVideos().forEach(video=>video.play()));
-document.querySelector('#pause-demos').addEventListener('click',()=>demoVideos.forEach(video=>video.pause()));
 const dialog = document.querySelector('#figure-dialog');
 document.querySelectorAll('[data-figure]').forEach(button => button.addEventListener('click',()=>{
   const image = document.querySelector('#figure-image');

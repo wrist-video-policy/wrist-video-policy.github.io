@@ -7,7 +7,7 @@
 <title>Wrist Video Policy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=showcase-20261123"><script src="app.js?v=showcase-20261123" defer></script>
+<link rel="stylesheet" href="styles.css?v=refined-20261123"><script src="app.js?v=refined-20261123" defer></script>
 </head>
 <body>
 <a class="skip" href="#experiments">Skip to demos</a>
@@ -22,14 +22,14 @@
 <div class="authors"><span><a href="https://jerryliujy.github.io/">Jingyuan Liu</a><sup>1,2</sup></span><span>Yongwei Chen<sup>1,3</sup></span><span>Yishan Yang<sup>1,4</sup></span><span>Zexin He<sup>1,3</sup></span><span>Xingang Pan<sup>3,*</sup></span><span>Zhi Hou<sup>1,*</sup></span></div>
 <div class="affiliations"><span><sup>1</sup> ACE Robotics</span><span><sup>2</sup> Fudan University</span><span><sup>3</sup> Nanyang Technological University</span><span><sup>4</sup> Southeast University</span></div>
 <p class="corresponding">* Corresponding authors</p>
-<div class="institution-logos" aria-label="Affiliated institutions"><a href="https://www.acerobotics.com/en/" aria-label="ACE Robotics"><img src="logo-ace.svg" alt="ACE Robotics"></a><a href="https://www.fudan.edu.cn/en/" aria-label="Fudan University"><img src="logo-fudan.png" alt="Fudan University"></a><a href="https://www.ntu.edu.sg/" aria-label="Nanyang Technological University"><img src="logo-ntu.png" alt="Nanyang Technological University"></a><a href="https://www.seu.edu.cn/english/" aria-label="Southeast University"><img src="logo-seu.svg" alt="Southeast University"></a></div>
+<div class="institution-logos" aria-label="Affiliated institutions"><a href="https://www.acerobotics.com/en/" aria-label="ACE Robotics"><img src="logo-ace.svg" alt="ACE Robotics"></a><a href="https://www.fudan.edu.cn/en/" aria-label="Fudan University"><img src="logo-fudan.png" alt="Fudan University"></a><a href="https://www.ntu.edu.sg/" aria-label="Nanyang Technological University"><img src="logo-ntu.png" alt="Nanyang Technological University"></a><a href="https://www.seu.edu.cn/english/" aria-label="Southeast University"><img src="logo-seu-official.png" alt="Southeast University official emblem"></a></div>
 </div>
   <div class="hero-links"><a class="button primary" href="https://github.com/wrist-video-policy/WVP" target="_blank" rel="noopener">Code</a></div>
 
   <div class="teaser-wrap"><button class="figure-button teaser" data-figure="teaser.png" data-title="Wrist Video Policy" aria-label="Enlarge Wrist Video Policy overview"><img src="teaser.png" alt="Wrist video prediction and 3D geometric priors connect through wrist-camera motion and transfer across robot embodiments." fetchpriority="high"></button></div>
 </section>
 <section id="experiments" class="section experiments"><div class="container">
-<div class="section-heading"><div><p class="eyebrow small">IN THE REAL WORLD</p><h2>Real-world demonstrations</h2></div><div class="playback-controls"><button id="play-demos">Play visible demos</button><button id="pause-demos">Pause demos</button></div></div>
+<div class="section-heading"><div><p class="eyebrow small">IN THE REAL WORLD</p><h2>Real-world demonstrations</h2></div></div>
 <div class="platforms" role="group" aria-label="Filter demonstrations"><button class="selected" data-platform="all" aria-pressed="true">All robots</button><button data-platform="franka" aria-pressed="false">Franka Panda</button><button data-platform="piper" aria-pressed="false">PiPER-X</button><button data-platform="galaxea" aria-pressed="false">Galaxea R1 Pro</button></div>
 <div id="video-gallery"></div>
 </div></section>
@@ -62,12 +62,7 @@
 <div class="comparison-grid"><article class="comparison-card"><h3>Non-stitch <span>RGB expert on decoded frames</span></h3><video class="comparison-video" src="comparison-non-stitch.mp4" poster="comparison-non-stitch.jpg" controls muted playsinline preload="none" aria-label="Non-stitch execution"></video></article><article class="comparison-card"><h3>Stitch <span>Pose estimation from predicted latents</span></h3><video class="comparison-video" src="comparison-stitch.mp4" poster="comparison-stitch.jpg" controls muted playsinline preload="none" aria-label="Stitched execution"></video></article></div>
 <p class="comparison-note">Across ten trials: 0/10 without stitching, 4/10 with stitching.</p>
 </div></section>
-<section class="section"><div class="container">
-<p class="eyebrow small">CLOSED-LOOP RECOVERY</p><h2>Observe the outcome.<br>Adjust the next prediction.</h2>
-<p class="section-intro">Execution can deviate from the original visual plan. Replanning from fresh observations lets WVP respond to the state the robot actually reaches.</p>
-<button class="figure-button" data-figure="recovery.webp" data-title="Recovery from execution deviations" aria-label="Enlarge recovery examples"><img src="recovery.webp" alt="PiPER-X retries after displacing a block; Galaxea realigns after missing the washer door handle." loading="lazy"></button>
-<div class="result-explanation"><div><h3>Retry after a displaced grasp</h3><p>PiPER-X closes its gripper too early and moves the block. From the updated wrist view, it reopens the gripper, approaches again, and completes the grasp.</p></div><div><h3>Realign with a recessed handle</h3><p>Galaxea misses the washing-machine handle on its initial approach. Subsequent predictions realign the gripper with the recess before opening the door.</p></div></div>
-</div></section>
+
 </main>
 <footer><a class="wordmark" href="#top">WVP</a><span>Wrist-Camera Video Diffusion as Generalizable Robot Policies</span><a href="#top">Back to top</a></footer>
 <dialog id="figure-dialog"><div class="dialog-top"><h2 id="figure-title"></h2><button id="close-dialog" aria-label="Close enlarged figure">Close</button></div><img id="figure-image" alt=""></dialog>
